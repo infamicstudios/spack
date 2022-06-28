@@ -10,11 +10,11 @@ class LinuxHeaders(Package):
     """The Linux kernel headers."""
 
     homepage = "https://www.kernel.org/"
-    url      = "https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.10.tar.xz"
-    list_url = "https://www.kernel.org/pub/linux/kernel"
-    list_depth = 2
 
-    version('4.9.10', sha256='bd6e05476fd8d9ea4945e11598d87bc97806bbc8d03556abbaaf809707661525')
+    def url_for_version(self, version):
+        return "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-{0}.tar.gz".format(version)
+    
+    version('5.19', branch='master', git="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git")
 
     def setup_build_environment(self, env):
         # This variable is used in the Makefile. If it is defined on the
